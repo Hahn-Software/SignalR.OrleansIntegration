@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SampleApp" type="CompoundRunConfigurationType">
+    <toRun name="SampleApp Web" type="LaunchSettings" />
+    <toRun name="SampleApp Silo" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>
