@@ -5,11 +5,12 @@
         <LangVersion>latest</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>Hahn-Softwareentwicklung</Authors>
+        <Description>An integration between AspNetCore.SignalR and Orleans to allow communication between clients distributed across multiple servers and backend services.</Description>
         <PackageTags>orleans, signalr, integration, aspnetcore</PackageTags>
-        <PackageVersion>1.0.0</PackageVersion>
+        <PackageVersion>1.0.1</PackageVersion>
         <Copyright>2020 Hahn-Softwareentwicklung</Copyright>
         <PackageProjectUrl>https://github.com/Hahn-Softwareentwicklung/SignalR.OrleansIntegration</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/Hahn-Softwareentwicklung/SignalR.OrleansIntegration/blob/master/LICENSE</PackageLicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/Hahn-Softwareentwicklung/SignalR.OrleansIntegration</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <Title>Orleans.SignalRIntegration</Title>

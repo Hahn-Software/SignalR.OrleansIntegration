@@ -5,9 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\AspNetCore.SignalR.OrleansIntegration\AspNetCore.SignalR.OrleansIntegration.csproj" />
-      <ProjectReference Include="..\SampleApp.Abstractions\SampleApp.Abstractions.csproj" />
+        <ProjectReference Include="..\..\src\AspNetCore.SignalR.OrleansIntegration\AspNetCore.SignalR.OrleansIntegration.csproj"/>
+        <ProjectReference Include="..\SampleApp.Abstractions\SampleApp.Abstractions.csproj"/>
     </ItemGroup>
-
 
 </Project>

@@ -1,5 +1,5 @@
-﻿using Orleans;
-using Orleans.Configuration;
+﻿using System;
+using Orleans;
 using Orleans.Hosting;
 using Orleans.SignalRIntegration.Core;
 using Orleans.SignalRIntegration.Core.Abstractions.GrainInterfaces;
@@ -8,11 +8,13 @@ namespace AspNetCore.SignalR.OrleansIntegration
 {
     public static class ClientBuilderExtensions
     {
-        public static IClientBuilder UseSignalR(this IClientBuilder builder,
-            bool fireAndForgetDelivery = SimpleMessageStreamProviderOptions.DEFAULT_VALUE_FIRE_AND_FORGET_DELIVERY)
+        public static IClientBuilder UseSignalR(this IClientBuilder builder, Action<OrleansSignalRClientOptions> configure = null)
         {
+            var clientOptions = new OrleansSignalRClientOptions();
+            configure?.Invoke(clientOptions);
+
             builder.AddSimpleMessageStreamProvider(OrleansSignalRConstants.StreamProviderName,
-                    options => { options.FireAndForgetDelivery = fireAndForgetDelivery; })
+                    options => { options.FireAndForgetDelivery = clientOptions.FireAndForgetDelivery; })
                 .ConfigureApplicationParts(manager => { manager.AddApplicationPart(typeof(IClientGrain).Assembly).WithReferences(); });
 
             return builder;

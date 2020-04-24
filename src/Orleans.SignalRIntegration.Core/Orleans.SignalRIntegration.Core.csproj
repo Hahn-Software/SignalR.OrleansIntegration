@@ -1,38 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Hahn-Softwareentwicklung</Authors>
-    <PackageTags>orleans, signalr, integration, aspnetcore</PackageTags>
-    <PackageVersion>1.0.0</PackageVersion>
-    <Copyright>2020 Hahn-Softwareentwicklung</Copyright>
-    <PackageProjectUrl>https://github.com/Hahn-Softwareentwicklung/SignalR.OrleansIntegration</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/Hahn-Softwareentwicklung/SignalR.OrleansIntegration/blob/master/LICENSE</PackageLicenseUrl>
-    <RepositoryUrl>https://github.com/Hahn-Softwareentwicklung/SignalR.OrleansIntegration</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <Title>Orleans.SignalRIntegration.Core</Title>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>Hahn-Softwareentwicklung</Authors>
+        <Description>An integration between AspNetCore.SignalR and Orleans to allow communication between clients distributed across multiple servers and backend services.</Description>
+        <PackageTags>orleans, signalr, integration, aspnetcore</PackageTags>
+        <PackageVersion>1.0.1</PackageVersion>
+        <Copyright>2020 Hahn-Softwareentwicklung</Copyright>
+        <PackageProjectUrl>https://github.com/Hahn-Softwareentwicklung/SignalR.OrleansIntegration</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/Hahn-Softwareentwicklung/SignalR.OrleansIntegration</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Title>Orleans.SignalRIntegration.Core</Title>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.1.5">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.1.5" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.1.5">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.1.5"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Orleans_CodeGenInputs Remove="Internal\GrainInterfaces\IClientGrain.cs" />
-    <Orleans_CodeGenInputs Remove="Internal\GrainInterfaces\IClientsGrain.cs" />
-    <Orleans_CodeGenInputs Remove="Internal\GrainInterfaces\IGrainWithHubTypedStringKey.cs" />
-    <Orleans_CodeGenInputs Remove="Internal\GrainInterfaces\IGroupGrain.cs" />
-    <Orleans_CodeGenInputs Remove="Internal\GrainInterfaces\IUserGrain.cs" />
-  </ItemGroup>
+    <ItemGroup>
+        <Orleans_CodeGenInputs Remove="Internal\GrainInterfaces\IClientGrain.cs"/>
+        <Orleans_CodeGenInputs Remove="Internal\GrainInterfaces\IClientsGrain.cs"/>
+        <Orleans_CodeGenInputs Remove="Internal\GrainInterfaces\IGrainWithHubTypedStringKey.cs"/>
+        <Orleans_CodeGenInputs Remove="Internal\GrainInterfaces\IGroupGrain.cs"/>
+        <Orleans_CodeGenInputs Remove="Internal\GrainInterfaces\IUserGrain.cs"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Orleans.SignalRIntegration.Core.Abstractions\Orleans.SignalRIntegration.Core.Abstractions.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Orleans.SignalRIntegration.Core.Abstractions\Orleans.SignalRIntegration.Core.Abstractions.csproj"/>
+    </ItemGroup>
 
 </Project>

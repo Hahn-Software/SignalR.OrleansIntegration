@@ -8,9 +8,9 @@ using SampleApp.Abstractions;
 
 namespace SampleApp.Silo
 {
-    internal class Program
+    internal static class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             var siloHost = StartSilo().Result;
 
@@ -27,8 +27,7 @@ namespace SampleApp.Silo
 
         private static Timer SetupChatServerTimer()
         {
-            var timer = new Timer();
-            timer.Interval = 10000;
+            var timer = new Timer {Interval = 10000};
 
             timer.Elapsed += (sender, e) =>
             {

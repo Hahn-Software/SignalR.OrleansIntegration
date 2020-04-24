@@ -1,4 +1,4 @@
-﻿using Orleans.Configuration;
+﻿using System;
 using Orleans.Hosting;
 using Orleans.SignalRIntegration.Core;
 using Orleans.SignalRIntegration.Grains;
@@ -7,15 +7,19 @@ namespace Orleans.SignalRIntegration
 {
     public static class SiloHostBuilderExtensions
     {
-        public static ISiloHostBuilder UseSignalR(this ISiloHostBuilder builder, bool registerStorageProviders = true,
-            bool fireAndForgetDelivery = SimpleMessageStreamProviderOptions.DEFAULT_VALUE_FIRE_AND_FORGET_DELIVERY)
+        public static ISiloHostBuilder UseSignalR(this ISiloHostBuilder builder, Action<OrleansSignalRSiloOptions> configure = null)
         {
-            builder.AddSimpleMessageStreamProvider(OrleansSignalRConstants.StreamProviderName,
-                    options => { options.FireAndForgetDelivery = fireAndForgetDelivery; })
-                .ConfigureApplicationParts(manager => { manager.AddApplicationPart(typeof(ClientGrain).Assembly).WithReferences(); })
-                .AddMemoryGrainStorage(OrleansSignalRConstants.StorageProviderName);
+            var siloOptions = new OrleansSignalRSiloOptions();
+            configure?.Invoke(siloOptions);
 
-            if (registerStorageProviders)
+            builder.AddSimpleMessageStreamProvider(OrleansSignalRConstants.StreamProviderName,
+                    options => { options.FireAndForgetDelivery = siloOptions.FireAndForgetDelivery; })
+                .ConfigureApplicationParts(manager => { manager.AddApplicationPart(typeof(ClientGrain).Assembly).WithReferences(); });
+
+            if (siloOptions.RegisterDefaultSignalRGrainStorage)
+                builder.AddMemoryGrainStorage(OrleansSignalRConstants.StorageProviderName);
+
+            if (siloOptions.RegisterDefaultPubSubStorage)
                 builder.AddMemoryGrainStorage("PubSubStore");
 
             return builder;

@@ -47,6 +47,17 @@ var clusterClient = new ClientBuilder()
 services.AddSingleton(clusterClient);
 ```
 
+It's also possible for you to configure whether to use fire and forget delivery for the underlying stream
+provider by passing in a configuration action to the `.UseSignalR()` method:
+```csharp
+    // ...
+    .UseSignalR(options =>
+    {
+        options.FireAndForgetDelivery = true;
+    })
+    // ...
+```
+
 In your SignalR service registration you also need to add the Orleans integration for each Hub you want to 
 integrate:
 ```csharp
@@ -106,14 +117,22 @@ var siloHost = new SiloHostBuilder()
 That's all. You're ready to start using your new cluster-able multi server SignalR services.
 
 Note that by default the Orleans plugin is registering Memory Storage as default for the `PubSubStore`. You
-can disable this behaviour by passing in a parameter to the `UseSignalR` call on the silo host builder. 
-Then you are able to register your own storage providers for the the mentioned grain storage provider:
+can disable this behaviour by passing in a configuration action to the `UseSignalR` call on the silo host
+builder. Then you are able to register your own storage providers for the the mentioned grain storage provider.
+There's also an option for you to register a custom SignalR Grains storage but normally that's not required
+because it's ok in most cases when currently connected clients are dropped on silo restart. Clients wouldn't 
+anyway be able to communicate. Also if required you can enable or disable fire and forget delivery for the
+underlying stream provider using the configure action.
 ```csharp
 const string invariant = "System.Data.SqlClient";
 var connectionString = _configuration.GetConnectionString("Orleans");
 
 var siloHost = new SiloHostBuilder()
-    .UseSignalR(false)
+    .UseSignalR(options =>
+    {
+        options.RegisterDefaultPubSubStorage = false;
+        options.RegisterDefaultSignalRGrainStorage = true;
+    })
     .AddAdoNetGrainStorage("PubSubStore", options =>
     {
         options.Invariant = invariant;

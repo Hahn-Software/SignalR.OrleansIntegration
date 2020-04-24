@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Orleans.Providers;
 using Orleans.SignalRIntegration.Core;
 using Orleans.SignalRIntegration.Core.Abstractions.GrainInterfaces;
@@ -11,13 +10,6 @@ namespace Orleans.SignalRIntegration.Grains
     [StorageProvider(ProviderName = OrleansSignalRConstants.StorageProviderName)]
     public class ClientGrain : Grain<ClientGrainState>, IClientGrain
     {
-        private readonly ILogger<ClientGrain> _logger;
-
-        public ClientGrain(ILogger<ClientGrain> logger)
-        {
-            _logger = logger;
-        }
-
         public async Task OnConnectedAsync(Guid hubLifetimeManagerId)
         {
             State.HubLifetimeManagerId = hubLifetimeManagerId;

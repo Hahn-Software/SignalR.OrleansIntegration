@@ -138,7 +138,7 @@ namespace AspNetCore.SignalR.OrleansIntegration.TestUtils.Microsoft
 
                 switch (message)
                 {
-                    case StreamItemMessage result:
+                    case StreamItemMessage _:
                         throw new NotSupportedException("Use 'StreamAsync' to call a streaming method");
                     case CompletionMessage completion:
                         return completion;
@@ -288,11 +288,6 @@ namespace AspNetCore.SignalR.OrleansIntegration.TestUtils.Microsoft
             public Type GetReturnType(string invocationId)
             {
                 return typeof(object);
-            }
-
-            public Type GetStreamItemType(string streamId)
-            {
-                throw new NotImplementedException();
             }
         }
     }

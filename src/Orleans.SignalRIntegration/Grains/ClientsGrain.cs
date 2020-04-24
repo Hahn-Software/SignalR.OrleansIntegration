@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using Orleans.SignalRIntegration.Core;
 using Orleans.SignalRIntegration.Core.Abstractions.GrainInterfaces;
 using Orleans.Streams;
@@ -12,13 +11,6 @@ namespace Orleans.SignalRIntegration.Grains
     public abstract class ClientsGrain<TGrainState> : Grain<TGrainState>, IClientsGrain
         where TGrainState : ClientsGrainState, new()
     {
-        protected readonly ILogger _logger;
-
-        public ClientsGrain(ILogger logger)
-        {
-            _logger = logger;
-        }
-
         public virtual async Task AddToClientsAsync(string connectionId)
         {
             if (!State.HandlesByConnectionId.ContainsKey(connectionId))
