@@ -12,9 +12,14 @@ namespace Orleans.SignalRIntegration
             var siloOptions = new OrleansSignalRSiloOptions();
             configure?.Invoke(siloOptions);
 
-            builder.AddSimpleMessageStreamProvider(OrleansSignalRConstants.StreamProviderName,
-                    options => { options.FireAndForgetDelivery = siloOptions.FireAndForgetDelivery; })
-                .ConfigureApplicationParts(manager => { manager.AddApplicationPart(typeof(ClientGrain).Assembly).WithReferences(); });
+            builder.AddSimpleMessageStreamProvider(OrleansSignalRConstants.StreamProviderName, options =>
+            {
+                options.FireAndForgetDelivery = siloOptions.FireAndForgetDelivery;
+            });
+
+            if (siloOptions.AddApplicationParts)
+                builder.ConfigureApplicationParts(manager =>
+                    { manager.AddApplicationPart(typeof(ClientGrain).Assembly).WithReferences(); });
 
             if (siloOptions.RegisterDefaultSignalRGrainStorage)
                 builder.AddMemoryGrainStorage(OrleansSignalRConstants.StorageProviderName);
